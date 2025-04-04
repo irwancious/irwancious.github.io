@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Ayo Jalan Bareng 😁</title>
+  <!-- Edited by Irwan -->
+  <style>
+    body {
+      background: linear-gradient(135deg, #f9d4ec, #f6f7fb);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      text-align: center;
+      padding: 50px;
+      color: #333;
+      transition: all 0.5s ease;
+      overflow: hidden;
+      cursor: url('https://cdn.custom-cursor.com/db/22342/32/mochi-mochi-peach-cat-with-wind-fan-toy-cursor.png'), auto;
+    }
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      max-width: 500px;
+      margin: auto;
+      animation: popIn 1s ease;
+      position: relative;
+      z-index: 1;
+    }
+    @keyframes popIn {
+      from { transform: scale(0.5); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    h1 {
+      font-size: 2em;
+      color: #ff4d88;
+    }
+    p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+    }
+    button {
+      background-color: #ff4d88;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1em;
+      margin: 10px;
+      border-radius: 30px;
+      cursor: url('https://cdn.custom-cursor.com/db/22341/32/mochi-mochi-peach-cat-with-wind-fan-toy-pointer.png'), pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #ff1a66;
+    }
+    .gif {
+      width: 200px;
+      margin: 20px auto;
+    }
+    .response-page {
+      display: none;
+      animation: fadeIn 1s ease forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    #play-music-btn {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #ffd1dc;
+      color: #333;
+      z-index: 999;
+      animation: pulse 2s infinite;
+      box-shadow: 0 0 0 0 rgba(255, 105, 180, 0.7);
+    }
+    @keyframes pulse {
+      0% {
+        transform: translateX(-50%) scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 105, 180, 0.7);
+      }
+      70% {
+        transform: translateX(-50%) scale(1.05);
+        box-shadow: 0 0 0 10px rgba(255, 105, 180, 0);
+      }
+      100% {
+        transform: translateX(-50%) scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 105, 180, 0);
+      }
+    }
+    .cursor-trail {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        background: hotpink;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        box-shadow: 0 0 10px hotpink, 0 0 20px pink;
+        animation: trailFade 0.8s forwards;
+      }
+      
+      @keyframes trailFade {
+        from { opacity: 1; transform: scale(1); }
+        to { opacity: 0; transform: scale(2); }
+      }
+      
+  </style>
+</head>
+<body>
+  <audio id="bg-music" loop>
+    <source src="https://cdn.pixabay.com/audio/2024/11/04/audio_8996b2b70d.mp3" type="audio/mpeg">
+  </audio>
+
+  <div id="main-page" class="card">
+    <h1>Hai Kamu! 😄</h1>
+    <p>Aku kepikiran gitu... Gimana kalau kita jalan bareng minggu ini?  
+    Ada tempat seru yang pengen banget aku tunjukkin ke kamu! 🥺👉👈</p>
+    <img class="gif" src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" alt="Cute GIF">
+    <div>
+      <button onclick="showResponse('yes')">Mau banget! 💕</button>
+      <button onclick="showResponse('no')">Hmm... pikir-pikir dulu 😅</button>
+    </div>
+  </div>
+
+  <div id="response-page" class="response-page">
+    <h1 id="response-message"></h1>
+    <img class="gif" id="response-gif" src="" alt="Response GIF">
+  </div>
+
+  <button id="play-music-btn" onclick="playMusic()">🎶 Putar Musik</button>
+
+  <script>
+    function playMusic() {
+      const audio = document.getElementById('bg-music');
+      audio.play();
+      document.getElementById('play-music-btn').style.display = 'none';
+    }
+
+    function showResponse(answer) {
+      const mainPage = document.getElementById('main-page');
+      const responsePage = document.getElementById('response-page');
+      const message = document.getElementById('response-message');
+      const gif = document.getElementById('response-gif');
+
+      mainPage.style.display = 'none';
+      responsePage.style.display = 'block';
+
+      if (answer === 'yes') {
+        message.textContent = "YAY!! 😍 Siap-siap yaa, aku jemput kamu nanti! 🚗💕";
+        gif.src = "https://media.giphy.com/media/111ebonMs90YLu/giphy.gif";
+      } else {
+        message.textContent = "Gapapa kok 😌 Tapi aku tetep berharap kita bisa jalan bareng suatu saat nanti! 🥺";
+        gif.src = "https://media.giphy.com/media/9Y5BbDSkSTiY8/giphy.gif";
+      }
+    }
+    document.addEventListener("mousemove", function(e) {
+        const trail = document.createElement("div");
+        trail.className = "cursor-trail";
+        trail.style.left = e.pageX + "px";
+        trail.style.top = e.pageY + "px";
+        document.body.appendChild(trail);
+        setTimeout(() => {
+          trail.remove();
+        }, 800);
+      });
+      
+  </script>
+</body>
+</html>
