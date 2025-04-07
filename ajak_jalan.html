@@ -3,78 +3,164 @@
 <head>
   <meta charset="UTF-8">
   <title>Ayo Jalan Bareng 😁</title>
-  <!-- Edited by Irwan -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    /* Reset dan background dasar */
     body {
-      background: linear-gradient(135deg, #f9d4ec, #f6f7fb);
+      margin: 0;
+      padding: 0;
       font-family: 'Comic Sans MS', cursive, sans-serif;
-      text-align: center;
-      padding: 50px;
-      color: #333;
-      transition: all 0.5s ease;
+      background: linear-gradient(to bottom, #0c1445, #1e2b6b); /* Biru agak tua */
+      color: #fff;
       overflow: hidden;
-      cursor: url('https://cdn.custom-cursor.com/db/22342/32/mochi-mochi-peach-cat-with-wind-fan-toy-cursor.png'), auto;
-    }
-    .card {
-      background: white;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-      max-width: 500px;
-      margin: auto;
-      animation: popIn 1s ease;
       position: relative;
-      z-index: 1;
+      text-align: center;
     }
+
+    /* Awan */
+    .cloud {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.9;
+      animation: floatCloud 45s linear infinite;
+    }
+    
+    .cloud::after,
+    .cloud::before {
+      content: '';
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+    }
+    
+    .cloud::before {
+      width: 60px;
+      height: 60px;
+      top: -30px;
+      left: 30px;
+    }
+    
+    .cloud::after {
+      width: 80px;
+      height: 80px;
+      top: -40px;
+      left: -20px;
+    }
+    
+    /* Animasi dari jauh kiri ke jauh kanan agar tidak menghilang */
+    @keyframes floatCloud {
+      0% {
+        left: -200px;
+        transform: translateX(0);
+      }
+      100% {
+        left: 100%;
+        transform: translateX(0);
+      }
+    }    
+
+    .cloud:nth-child(1) { top: 10%; left: -100px; width: 120px; height: 60px; animation-delay: 0s; }
+    .cloud:nth-child(2) { top: 30%; left: -200px; width: 150px; height: 70px; animation-delay: 10s; }
+    .cloud:nth-child(3) { top: 50%; left: -150px; width: 100px; height: 50px; animation-delay: 20s; }
+
+    /* Bintang jatuh */
+    .star {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #fffdd0;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #fffdd0;
+      animation: fall 3s linear infinite;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-10px) translateX(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) translateX(-100px);
+        opacity: 0;
+      }
+    }
+
+    /* Konten utama */
+    .card {
+      position: relative;
+      background: rgba(255, 255, 255, 0.85);
+      color: #333;
+      border-radius: 20px;
+      padding: 30px;
+      margin: 100px auto;
+      max-width: 500px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      z-index: 10;
+      animation: popIn 1s ease;
+    }
+
     @keyframes popIn {
-      from { transform: scale(0.5); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
     }
+
     h1 {
-      font-size: 2em;
-      color: #ff4d88;
+      color: #ff4081;
     }
+
     p {
       font-size: 1.2em;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
+
     button {
-      background-color: #ff4d88;
+      background-color: #ff69b4;
       color: white;
       border: none;
-      padding: 15px 30px;
+      padding: 15px 25px;
       font-size: 1em;
-      margin: 10px;
       border-radius: 30px;
-      cursor: url('https://cdn.custom-cursor.com/db/22341/32/mochi-mochi-peach-cat-with-wind-fan-toy-pointer.png'), pointer;
+      margin: 10px;
+      cursor: pointer;
       transition: background-color 0.3s ease;
     }
+
     button:hover {
-      background-color: #ff1a66;
+      background-color: #e91e63;
     }
+
     .gif {
-      width: 200px;
-      margin: 20px auto;
+      width: 180px;
+      margin: 20px 0;
     }
+
     .response-page {
       display: none;
       animation: fadeIn 1s ease forwards;
     }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* Musik */
     #play-music-btn {
       position: fixed;
       bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
-      background-color: #ffd1dc;
-      color: #333;
-      z-index: 999;
+      background-color: #fff;
+      color: #000;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-weight: bold;
+      box-shadow: 0 0 10px pink;
+      z-index: 20;
       animation: pulse 2s infinite;
-      box-shadow: 0 0 0 0 rgba(255, 105, 180, 0.7);
     }
+
     @keyframes pulse {
       0% {
         transform: translateX(-50%) scale(1);
@@ -89,34 +175,58 @@
         box-shadow: 0 0 0 0 rgba(255, 105, 180, 0);
       }
     }
-    .cursor-trail {
-        position: fixed;
-        width: 10px;
-        height: 10px;
-        background: hotpink;
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 9999;
-        box-shadow: 0 0 10px hotpink, 0 0 20px pink;
-        animation: trailFade 0.8s forwards;
+
+    /* Responsif */
+    @media (max-width: 600px) {
+      .card {
+        margin: 60px 20px;
+        padding: 20px;
       }
-      
-      @keyframes trailFade {
-        from { opacity: 1; transform: scale(1); }
-        to { opacity: 0; transform: scale(2); }
+
+      .gif {
+        width: 140px;
       }
-      
+
+      h1 {
+        font-size: 1.4em;
+      }
+
+      p {
+        font-size: 1em;
+      }
+    }
   </style>
 </head>
 <body>
+
+  <!-- Awan -->
+  <div class="cloud"></div>
+  <div class="cloud"></div>
+  <div class="cloud"></div>
+
+  <!-- Bintang Jatuh (jumlah banyak) -->
+  <script>
+    for (let i = 0; i < 30; i++) {
+      let star = document.createElement("div");
+      star.className = "star";
+      star.style.left = Math.random() * window.innerWidth + "px";
+      star.style.top = Math.random() * -200 + "px";
+      star.style.animationDelay = Math.random() * 5 + "s";
+      star.style.opacity = Math.random();
+      document.body.appendChild(star);
+    }
+  </script>
+
+  <!-- Musik -->
   <audio id="bg-music" loop>
     <source src="https://cdn.pixabay.com/audio/2024/11/04/audio_8996b2b70d.mp3" type="audio/mpeg">
   </audio>
 
+  <!-- Halaman Utama -->
   <div id="main-page" class="card">
     <h1>Hai Kamu! 😄</h1>
     <p>Aku kepikiran gitu... Gimana kalau kita jalan bareng minggu ini?  
-    Ada tempat seru yang pengen banget aku tunjukkin ke kamu! 🤩</p>
+    Ada tempat seru yang pengen banget aku tunjukkin ke kamu! (っ◕‿◕)っ</p>
     <img class="gif" src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" alt="Cute GIF">
     <div>
       <button onclick="showResponse('yes')">Mau banget! 💕</button>
@@ -124,7 +234,8 @@
     </div>
   </div>
 
-  <div id="response-page" class="response-page">
+  <!-- Halaman Respon -->
+  <div id="response-page" class="response-page card">
     <h1 id="response-message"></h1>
     <img class="gif" id="response-gif" src="" alt="Response GIF">
   </div>
@@ -155,17 +266,6 @@
         gif.src = "https://media.giphy.com/media/9Y5BbDSkSTiY8/giphy.gif";
       }
     }
-    document.addEventListener("mousemove", function(e) {
-        const trail = document.createElement("div");
-        trail.className = "cursor-trail";
-        trail.style.left = e.pageX + "px";
-        trail.style.top = e.pageY + "px";
-        document.body.appendChild(trail);
-        setTimeout(() => {
-          trail.remove();
-        }, 800);
-      });
-      
   </script>
 </body>
 </html>
