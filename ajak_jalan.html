@@ -5,12 +5,11 @@
   <title>Ayo Jalan Bareng 😁</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    /* Reset dan background dasar */
     body {
       margin: 0;
       padding: 0;
       font-family: 'Comic Sans MS', cursive, sans-serif;
-      background: linear-gradient(to bottom, #0c1445, #1e2b6b); /* Biru agak tua */
+      background: linear-gradient(to bottom, #0c1445, #1e2b6b);
       color: #fff;
       overflow: hidden;
       position: relative;
@@ -25,7 +24,7 @@
       opacity: 0.9;
       animation: floatCloud 45s linear infinite;
     }
-    
+
     .cloud::after,
     .cloud::before {
       content: '';
@@ -33,38 +32,20 @@
       background: white;
       border-radius: 50%;
     }
-    
-    .cloud::before {
-      width: 60px;
-      height: 60px;
-      top: -30px;
-      left: 30px;
-    }
-    
-    .cloud::after {
-      width: 80px;
-      height: 80px;
-      top: -40px;
-      left: -20px;
-    }
-    
-    /* Animasi dari jauh kiri ke jauh kanan agar tidak menghilang */
+
+    .cloud::before { width: 60px; height: 60px; top: -30px; left: 30px; }
+    .cloud::after { width: 80px; height: 80px; top: -40px; left: -20px; }
+
     @keyframes floatCloud {
-      0% {
-        left: -200px;
-        transform: translateX(0);
-      }
-      100% {
-        left: 100%;
-        transform: translateX(0);
-      }
-    }    
+      0% { left: -200px; }
+      100% { left: 100%; }
+    }
 
     .cloud:nth-child(1) { top: 10%; left: -100px; width: 120px; height: 60px; animation-delay: 0s; }
     .cloud:nth-child(2) { top: 30%; left: -200px; width: 150px; height: 70px; animation-delay: 10s; }
     .cloud:nth-child(3) { top: 50%; left: -150px; width: 100px; height: 50px; animation-delay: 20s; }
 
-    /* Bintang jatuh */
+    /* Bintang Jatuh */
     .star {
       position: absolute;
       width: 4px;
@@ -76,17 +57,11 @@
     }
 
     @keyframes fall {
-      0% {
-        transform: translateY(-10px) translateX(0);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(100vh) translateX(-100px);
-        opacity: 0;
-      }
+      0% { transform: translateY(-10px) translateX(0); opacity: 1; }
+      100% { transform: translateY(100vh) translateX(-100px); opacity: 0; }
     }
 
-    /* Konten utama */
+    /* Kartu utama */
     .card {
       position: relative;
       background: rgba(255, 255, 255, 0.85);
@@ -105,14 +80,8 @@
       100% { transform: scale(1); opacity: 1; }
     }
 
-    h1 {
-      color: #ff4081;
-    }
-
-    p {
-      font-size: 1.2em;
-      margin-bottom: 20px;
-    }
+    h1 { color: #ff4081; }
+    p { font-size: 1.2em; margin-bottom: 20px; }
 
     button {
       background-color: #ff69b4;
@@ -126,14 +95,9 @@
       transition: background-color 0.3s ease;
     }
 
-    button:hover {
-      background-color: #e91e63;
-    }
+    button:hover { background-color: #e91e63; }
 
-    .gif {
-      width: 180px;
-      margin: 20px 0;
-    }
+    .gif { width: 180px; margin: 20px 0; }
 
     .response-page {
       display: none;
@@ -145,55 +109,35 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Musik */
-    #play-music-btn {
+    /* Tombol fallback musik */
+    #music-fallback {
+      display: none;
       position: fixed;
       bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
-      background-color: #fff;
-      color: #000;
-      padding: 10px 20px;
-      border-radius: 20px;
+      background: white;
+      color: #ff69b4;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 25px;
       font-weight: bold;
-      box-shadow: 0 0 10px pink;
-      z-index: 20;
+      z-index: 999;
+      box-shadow: 0 0 10px #ff69b4;
       animation: pulse 2s infinite;
     }
 
     @keyframes pulse {
-      0% {
-        transform: translateX(-50%) scale(1);
-        box-shadow: 0 0 0 0 rgba(255, 105, 180, 0.7);
-      }
-      70% {
-        transform: translateX(-50%) scale(1.05);
-        box-shadow: 0 0 0 10px rgba(255, 105, 180, 0);
-      }
-      100% {
-        transform: translateX(-50%) scale(1);
-        box-shadow: 0 0 0 0 rgba(255, 105, 180, 0);
-      }
+      0% { transform: translateX(-50%) scale(1); box-shadow: 0 0 0 0 rgba(255, 105, 180, 0.7); }
+      70% { transform: translateX(-50%) scale(1.05); box-shadow: 0 0 0 10px rgba(255, 105, 180, 0); }
+      100% { transform: translateX(-50%) scale(1); box-shadow: 0 0 0 0 rgba(255, 105, 180, 0); }
     }
 
-    /* Responsif */
     @media (max-width: 600px) {
-      .card {
-        margin: 60px 20px;
-        padding: 20px;
-      }
-
-      .gif {
-        width: 140px;
-      }
-
-      h1 {
-        font-size: 1.4em;
-      }
-
-      p {
-        font-size: 1em;
-      }
+      .card { margin: 60px 20px; padding: 20px; }
+      .gif { width: 140px; }
+      h1 { font-size: 1.4em; }
+      p { font-size: 1em; }
     }
   </style>
 </head>
@@ -204,10 +148,10 @@
   <div class="cloud"></div>
   <div class="cloud"></div>
 
-  <!-- Bintang Jatuh (jumlah banyak) -->
+  <!-- Bintang jatuh -->
   <script>
     for (let i = 0; i < 30; i++) {
-      let star = document.createElement("div");
+      const star = document.createElement("div");
       star.className = "star";
       star.style.left = Math.random() * window.innerWidth + "px";
       star.style.top = Math.random() * -200 + "px";
@@ -222,7 +166,10 @@
     <source src="https://cdn.pixabay.com/audio/2024/11/04/audio_8996b2b70d.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- Halaman Utama -->
+  <!-- Tombol fallback jika autoplay gagal -->
+  <button id="music-fallback" onclick="manuallyPlayMusic()">🎵 Klik untuk Putar Musik</button>
+
+  <!-- Halaman utama -->
   <div id="main-page" class="card">
     <h1>Hai Kamu! 😄</h1>
     <p>Aku kepikiran gitu... Gimana kalau kita jalan bareng minggu ini?  
@@ -234,28 +181,42 @@
     </div>
   </div>
 
-  <!-- Halaman Respon -->
+  <!-- Halaman respon -->
   <div id="response-page" class="response-page card">
     <h1 id="response-message"></h1>
     <img class="gif" id="response-gif" src="" alt="Response GIF">
   </div>
 
-  <button id="play-music-btn" onclick="playMusic()">🎶 Putar Musik</button>
-
   <script>
-    function playMusic() {
-      const audio = document.getElementById('bg-music');
+    const audio = document.getElementById('bg-music');
+    const fallbackBtn = document.getElementById('music-fallback');
+
+    // Coba autoplay saat halaman dimuat
+    window.addEventListener('DOMContentLoaded', () => {
+      const tryPlay = audio.play();
+      if (tryPlay !== undefined) {
+        tryPlay
+          .then(() => {
+            // Musik berhasil autoplay
+          })
+          .catch(() => {
+            // Autoplay gagal → tampilkan tombol fallback
+            fallbackBtn.style.display = 'block';
+          });
+      }
+    });
+
+    function manuallyPlayMusic() {
       audio.play();
-      document.getElementById('play-music-btn').style.display = 'none';
+      fallbackBtn.style.display = 'none';
     }
 
     function showResponse(answer) {
-      const mainPage = document.getElementById('main-page');
+      document.getElementById('main-page').style.display = 'none';
       const responsePage = document.getElementById('response-page');
       const message = document.getElementById('response-message');
       const gif = document.getElementById('response-gif');
 
-      mainPage.style.display = 'none';
       responsePage.style.display = 'block';
 
       if (answer === 'yes') {
