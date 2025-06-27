@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kenalan Yuk 🙈</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive;
+      background: linear-gradient(to bottom right, #fff0f5, #e0f7fa);
+      text-align: center;
+      padding: 40px;
+    }
+
+    h1 {
+      color: #e91e63;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      margin: 20px auto;
+      border-radius: 15px;
+      box-shadow: 0 0 15px #ffcdd2;
+      max-width: 400px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 8px;
+      border: none;
+      border-radius: 10px;
+      background-color: #ff69b4;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #ff1493;
+    }
+
+    #finalNote {
+      margin-top: 30px;
+      padding: 20px;
+      background: #fce4ec;
+      border: 2px dashed #f06292;
+      border-radius: 12px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Mau Kenalan Lebih Dekat Nggak? 😁</h1>
+
+  <div class="card">
+    <p>1. Kamu tim apa?</p>
+    <button onclick="showReply('Wah, tim rebahan cocok banget sama aku 😌')">Tim rebahan 🛋️</button>
+    <button onclick="showReply('Wih, tim jalan-jalan! Nanti aku temenin ya 😏')">Tim jalan-jalan 🚶‍♀️</button>
+  </div>
+
+  <div class="card">
+    <p>2. Kalau diajak ngobrol panjang, kamu:</p>
+    <button onclick="showReply('Berarti kamu cocok buat ngobrol sama aku tiap malam 😚')">Mau banget!</button>
+    <button onclick="showReply('Gapapa sih, asal jangan ngilang duluan 🤭')">Kadang aja~</button>
+  </div>
+
+  <div class="card">
+    <p>3. Kamu suka yang kayak gimana?</p>
+    <button onclick="showReply('Cieee kamu ngetik ini sambil senyum ya 😏')">Lucu & perhatian</button>
+    <button onclick="showReply('Hehe... aku kayaknya masuk kriteria deh 🙈')">Kocak & nyambung</button>
+  </div>
+
+  <div id="finalNote">
+    💌 <b>Eh, makasih ya udah jawab semua iseng-iseng ini.</b><br><br>
+    Sebenernya aku cuma pengen bilang... kamu tuh seru banget buat diajak kenalan.  
+    Dan jujur aja, aku pengen lebih deket sama kamu 🌸  
+    <br><br>
+    Gimana kalau kita ngobrol beneran abis ini? 😄
+  </div>
+
+  <!-- Suara bucin -->
+  <audio id="bucinSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_2a6ad4ad0e.mp3?filename=kiss-110027.mp3" preload="auto"></audio>
+
+  <script>
+    let clickCount = 0;
+
+    function showReply(message) {
+      alert(message);
+      playSound();
+      clickCount++;
+      if (clickCount >= 3) {
+        document.getElementById("finalNote").style.display = "block";
+        setTimeout(() => alert("Eh btw... aku beneran pengen kenal kamu lebih dekat 😳"), 300);
+      }
+    }
+
+    function playSound() {
+      const sound = document.getElementById("bucinSound");
+      sound.currentTime = 0;
+      sound.play();
+    }
+  </script>
+
+</body>
+</html>
