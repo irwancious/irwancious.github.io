@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selamat Ulang Tahun Tata!</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(120deg, #ffdde1, #ee9ca7);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    h1 {
+      color: white;
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    button {
+      padding: 15px 25px;
+      font-size: 1.2em;
+      border: none;
+      background-color: #fff;
+      color: #ff6b81;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #ffe2e6;
+      transform: scale(1.05);
+    }
+
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      z-index: 10;
+      transition: transform 0.4s ease;
+    }
+
+    .popup.active {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .popup h2 {
+      color: #ff6b81;
+    }
+
+    .balloon {
+      position: absolute;
+      width: 50px;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(0); }
+      to { transform: translateY(-120vh); }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Selamat Ulang Tahun Tata 🎂</h1>
+  <button onclick="showSurprise()">Klik untuk Lihat Kejutan</button>
+
+  <div class="popup" id="popup">
+    <h2>🎉 Happy 21st Birthday Tata! 🎉</h2>
+    <p>Semoga setiap langkahmu dipenuhi kebahagiaan, cinta, dan hal-hal indah yang kamu impikan!</p>
+    <p>Terima kasih sudah menjadi kamu yang luar biasa. ❤️</p>
+  </div>
+
+  <!-- Musik latar (ganti dengan musik pilihan) -->
+  <audio id="bg-music" loop>
+    <source src="lofi-study-calm-peaceful-chill-hop-112191.mp3" type="audio/mpeg">
+    Browsermu tidak mendukung audio.
+  </audio>
+
+  <script>
+    const popup = document.getElementById('popup');
+    const music = document.getElementById('bg-music');
+
+    function showSurprise() {
+  popup.classList.add('active');
+  music.play();
+
+  // spawn pertama
+  spawnBalloons();
+
+  // lalu balon muncul terus setiap 3 detik
+  setInterval(spawnBalloons, 3000);
+}
+
+    function spawnBalloons() {
+      for (let i = 0; i < 10; i++) {
+        const balloon = document.createElement('img');
+        balloon.src = 'https://pics.clipartpng.com/midle/Balloons_Colorful_PNG_Clip_Art-1623.png';
+        balloon.classList.add('balloon');
+        balloon.style.left = Math.random() * 100 + 'vw';
+        balloon.style.animationDuration = 5 + Math.random() * 5 + 's';
+        document.body.appendChild(balloon);
+
+        // Hapus balon setelah selesai naik
+        setTimeout(() => {
+          balloon.remove();
+        }, 10000);
+      }
+    }
+  </script>
+
+</body>
+</html>
