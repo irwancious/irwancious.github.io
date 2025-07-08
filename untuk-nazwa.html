@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Ulang Tahun, Nazwa! 🎉💖✨</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        /* Custom font for a playful touch */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to right top, #FFD1DC, #FFB6C1, #FFC0CB); /* Softer pink gradient */
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden; /* Hide overflow for confetti and balloons outside the main card */
+            position: relative; /* For positioning absolute elements like balloons */
+        }
+        .pacifico-font {
+            font-family: 'Pacifico', cursive;
+        }
+        /* Confetti animation */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #FFD700; /* Gold */
+            animation: fall linear infinite;
+            opacity: 0;
+            border-radius: 50%;
+        }
+        .confetti:nth-child(2n) { background-color: #FF69B4; /* Hot Pink */ }
+        .confetti:nth-child(3n) { background-color: #87CEEB; /* Sky Blue */ }
+        .confetti:nth-child(4n) { background-color: #FFA07A; /* Light Salmon */ }
+
+        @keyframes fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0.7; }
+        }
+
+        /* Balloon animation */
+        .balloon {
+            position: absolute;
+            bottom: -100px; /* Start below the screen */
+            width: 80px;
+            height: 100px;
+            background-color: #FF69B4; /* Default pink */
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; /* Balloon shape */
+            box-shadow: inset -10px -10px 0px rgba(0,0,0,0.2);
+            animation: floatUp 10s ease-in-out infinite, sway 4s ease-in-out infinite alternate;
+            z-index: 0; /* Behind the main content */
+        }
+        .balloon::before {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 15px solid inherit; /* Inherit color from balloon */
+        }
+        .balloon::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 40px;
+            background-color: rgba(0,0,0,0.3); /* String */
+            border-radius: 2px;
+        }
+
+        /* Different balloon colors */
+        .balloon:nth-child(2n) { background-color: #87CEEB; } /* Blue */
+        .balloon:nth-child(3n) { background-color: #FFD700; } /* Gold */
+        .balloon:nth-child(4n) { background-color: #FFA07A; } /* Orange */
+
+        /* Different starting positions and animation delays */
+        .balloon:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .balloon:nth-child(2) { left: 30%; animation-delay: 2s; animation-duration: 12s; }
+        .balloon:nth-child(3) { left: 50%; animation-delay: 4s; animation-duration: 9s; }
+        .balloon:nth-child(4) { left: 70%; animation-delay: 1s; animation-duration: 11s; }
+        .balloon:nth-child(5) { left: 90%; animation-delay: 3s; animation-duration: 10s; }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 0.8; }
+            100% { transform: translateY(-120vh); opacity: 0; }
+        }
+
+        @keyframes sway {
+            0% { transform: translateX(0) rotate(0deg); }
+            50% { transform: translateX(20px) rotate(5deg); }
+            100% { transform: translateX(0) rotate(0deg); }
+        }
+
+        /* Mute button styling */
+        #muteButton {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 20; /* Above everything */
+            transition: background-color 0.3s ease;
+        }
+        #muteButton:hover {
+            background-color: rgba(255, 255, 255, 1);
+        }
+
+        /* Gift box styling */
+        .gift-box {
+            width: 120px;
+            height: 100px;
+            background-color: #EF4444; /* Red */
+            border-radius: 8px;
+            margin: 0 auto 2rem;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem; /* For the gift icon */
+            color: white;
+            overflow: hidden; /* Hide overflow for ribbon */
+        }
+        .gift-box:hover {
+            transform: translateY(-5px) scale(1.05);
+        }
+        .gift-box::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 100%;
+            background-color: #F87171; /* Lighter red ribbon */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .gift-box::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 20px;
+            background-color: #F87171; /* Lighter red ribbon */
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .gift-box.opened {
+            transform: rotateY(180deg); /* Simple open effect */
+            opacity: 0; /* Hide when opened */
+            pointer-events: none; /* Disable clicks */
+        }
+
+        /* Sparkle effect for heading */
+        .sparkle-text {
+            position: relative;
+            display: inline-block;
+            animation: textGlow 1.5s infinite alternate;
+        }
+
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 5px rgba(255,255,255,0.5), 0 0 10px rgba(255,255,255,0.3); }
+            100% { text-shadow: 0 0 10px rgba(255,255,255,0.8), 0 0 20px rgba(255,255,255,0.6); }
+        }
+
+        /* Ensure the main content card is scrollable if it overflows */
+        .main-content-card {
+            max-height: 90vh; /* Set a max height relative to viewport height */
+            overflow-y: auto; /* Enable vertical scrolling if content overflows */
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+            padding-bottom: 1rem; /* Add some padding at the bottom for better scroll experience */
+        }
+
+        /* Scroll indicator arrow styling */
+        .scroll-indicator {
+            font-size: 2.5rem;
+            color: #FF69B4; /* Hot Pink */
+            margin-top: 0.5rem; /* Adjust margin for above message */
+            margin-bottom: 0.5rem;
+            animation: bounce 1s infinite;
+            display: none; /* Hidden by default */
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+    </style>
+</head>
+<body class="p-4">
+    <!-- Confetti elements -->
+    <script>
+        function createConfetti() {
+            const confettiCount = 50;
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.animationDuration = Math.random() * 3 + 2 + 's'; /* 2-5 seconds */
+                confetti.style.animationDelay = Math.random() * 2 + 's'; /* 0-2 seconds delay */
+                document.body.appendChild(confetti);
+            }
+        }
+        window.onload = createConfetti;
+    </script>
+
+    <!-- Background Music -->
+    <audio id="backgroundMusic" autoplay loop volume="0.5">
+        <!-- Menggunakan contoh musik yang lebih romantis/semangat dari SoundHelix -->
+        <source src="https://audiocdn.epidemicsound.com/lqmp3/01JV88EYKP6DYNCRE9K983YXFW.mp3" type="audio/mpeg">
+        Maaf, browser Anda tidak mendukung elemen audio.
+    </audio>
+
+    <!-- Mute/Unmute Button -->
+    <button id="muteButton">
+        <svg id="volumeOnIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 0 010 12.728M5.586 15H4a1 1 0 01-1-1V9a1 1 0 011-1h1.586l4.707-4.707A1 1 0 0112 3v18a1 1 0 01-1.707.707L5.586 15z" />
+        </svg>
+        <svg id="volumeOffIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 0 010 12.728M5.586 15H4a1 1 0 01-1-1V9a1 1 0 011-1h1.586l4.707-4.707A1 1 0 0112 3v18a1 1 0 01-1.707.707L5.586 15zM17 10l4 4m0-4l-4 4" />
+        </svg>
+    </button>
+
+    <!-- Balloon elements -->
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+
+    <div class="bg-white p-6 sm:p-8 md:p-10 rounded-2xl shadow-2xl text-center max-w-md mx-auto relative z-10 transform transition-transform duration-300 hover:scale-105 main-content-card">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-pink-600 mb-4 pacifico-font sparkle-text">
+            Selamat Ulang Tahun, Nazwa! 💖
+        </h1>
+
+        <!-- Placeholder for Nazwa's Photo -->
+        <div class="w-32 h-32 sm:w-40 sm:h-40 mx-auto mb-6 rounded-full overflow-hidden shadow-lg border-4 border-pink-300">
+            <img src="nazwa2.jpg" alt="Foto Nazwa" class="w-full h-full object-cover">
+        </div>
+
+        <p class="text-lg sm:text-xl text-gray-700 mb-6 leading-relaxed">
+            Di hari spesialmu ini, semoga setiap detikmu dipenuhi kebahagiaan, tawa, dan cinta yang tak terhingga!
+        </p>
+        <p class="text-md sm:text-lg text-gray-600 mb-8 italic">
+            Semoga sehat selalu, semangatmu membara, dan harimu selalu seindah senyummu yang memukau! ✨
+            <br>Kamu adalah anugerah.
+        </p>
+
+        <!-- Interactive Gift Box -->
+        <div id="giftBox" class="gift-box">
+            🎁
+        </div>
+        <p id="giftBoxInstruction" class="text-gray-500 text-sm mb-4">Klik kotak hadiahnya!</p>
+
+        <!-- Scroll Indicator Arrow (Moved to appear BEFORE surprise message) -->
+        <div id="scrollIndicator" class="scroll-indicator">
+            ↓
+        </div>
+
+        <div id="surpriseMessage" class="mt-8 p-4 bg-yellow-100 border border-yellow-300 text-yellow-800 rounded-lg hidden transition-opacity duration-500 opacity-0">
+            <p class="text-md sm:text-lg font-semibold">
+                Happy Birthday, Nazwa! Semoga tahun ini menjadi babak baru yang penuh petualangan seru, pencapaian luar biasa, dan kebahagiaan yang tak ada habisnya. Teruslah kejar mimpimu dengan semangat membara, karena kamu pantas mendapatkan yang terbaik!
+                <br>⸜(｡˃ ᵕ ˂ )⸝♡
+                <br><br>
+                Oh iya, jangan lupa bagi kue nya yaaaaa wkwkwkwk 😅
+                <br><br>
+                <font style="font-style: italic; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size:small">From : Abangmu yang paling keren (Irwan)</font>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const giftBox = document.getElementById('giftBox');
+        const surpriseMessage = document.getElementById('surpriseMessage');
+        const giftBoxInstruction = document.getElementById('giftBoxInstruction');
+        const scrollIndicator = document.getElementById('scrollIndicator'); // Get the new arrow element
+        const mainContentCard = document.querySelector('.main-content-card'); // Get the main content card
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        const muteButton = document.getElementById('muteButton');
+        const volumeOnIcon = document.getElementById('volumeOnIcon');
+        const volumeOffIcon = document.getElementById('volumeOffIcon');
+
+        // Set initial state for icons: volume on
+        volumeOnIcon.classList.remove('hidden');
+        volumeOffIcon.classList.add('hidden');
+
+        // Attempt to play music on page load
+        window.addEventListener('load', () => {
+            backgroundMusic.play().catch(e => {
+                console.log("Autoplay was prevented by browser:", e);
+                // If autoplay is blocked, you might want to inform the user
+                // or just let them use the mute button to start it manually.
+            });
+        });
+
+        // Handle mute/unmute button click
+        muteButton.addEventListener('click', function() {
+            if (backgroundMusic.muted) {
+                backgroundMusic.muted = false;
+                backgroundMusic.play().catch(e => console.log("Play after interaction prevented:", e));
+                volumeOnIcon.classList.remove('hidden');
+                volumeOffIcon.classList.add('hidden');
+            } else {
+                backgroundMusic.muted = true;
+                volumeOnIcon.classList.add('hidden');
+                volumeOffIcon.classList.remove('hidden');
+            }
+        });
+
+        // Fallback: If autoplay is blocked, try to play on first user interaction
+        // This listener will only run once.
+        document.addEventListener('click', function tryPlayMusicOnce() {
+            if (backgroundMusic.paused && !backgroundMusic.muted) {
+                backgroundMusic.play().catch(e => console.log("Play on first click prevented:", e));
+            }
+            document.removeEventListener('click', tryPlayMusicOnce); // Remove itself after first attempt
+        }, { once: true });
+
+
+        // Function to check if content overflows and show/hide arrow
+        function checkScrollIndicator() {
+            // Only show arrow if surprise message is visible AND content overflows
+            // We need to check if the surprise message itself is overflowing, or if the main card is.
+            // Since main-content-card has overflow-y: auto, we check its scrollHeight.
+            if (!surpriseMessage.classList.contains('hidden') && mainContentCard.scrollHeight > mainContentCard.clientHeight) {
+                scrollIndicator.style.display = 'block';
+                setTimeout(() => {
+                    scrollIndicator.style.opacity = '1';
+                }, 10);
+            } else {
+                scrollIndicator.style.opacity = '0';
+                setTimeout(() => {
+                    scrollIndicator.style.display = 'none';
+                }, 300); // Match transition duration
+            }
+        }
+
+        // Gift box click event
+        giftBox.addEventListener('click', function() {
+            if (surpriseMessage.classList.contains('hidden')) {
+                // Animate gift box opening
+                giftBox.classList.add('opened');
+                giftBoxInstruction.classList.add('hidden'); // Hide instruction
+
+                // Show surprise message after a short delay
+                setTimeout(() => {
+                    surpriseMessage.classList.remove('hidden');
+                    // Scroll to the top of the message when it appears
+                    surpriseMessage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    setTimeout(() => {
+                        surpriseMessage.classList.remove('opacity-0');
+                        checkScrollIndicator(); // Check and show arrow after message appears
+                    }, 10); // Small delay to allow display to change before transition
+                }, 300); // Match gift box animation duration
+            } else {
+                // If message is already open, clicking gift box will hide it
+                surpriseMessage.classList.add('opacity-0');
+                checkScrollIndicator(); // Hide arrow immediately
+                setTimeout(() => {
+                    surpriseMessage.classList.add('hidden');
+                    giftBox.classList.remove('opened'); // Close gift box
+                    giftBoxInstruction.classList.remove('hidden'); // Show instruction again
+                }, 500); // Match transition duration
+            }
+        });
+
+        // Also check on window resize in case content overflow changes
+        window.addEventListener('resize', checkScrollIndicator);
+
+        // Initial check in case the page loads with overflow (less likely but good practice)
+        window.addEventListener('load', checkScrollIndicator);
+    </script>
+</body>
+</html>
