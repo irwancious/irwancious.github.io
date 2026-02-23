@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Untuk Kamu 💖</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ff9acb, #ffc1e3);
+      overflow: hidden;
+    }
+
+    /* Opening Screen */
+    .opening {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, #ff4fa3, #ff9acb);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: white;
+      z-index: 10;
+      text-align: center;
+      cursor: pointer;
+      transition: opacity 1s ease;
+    }
+
+    .opening h1 {
+      font-size: 28px;
+      margin-bottom: 15px;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    .card {
+      background: white;
+      max-width: 420px;
+      width: 90%;
+      padding: 28px;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      position: relative;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s ease;
+    }
+
+    .card.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .photo {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid #ff4fa3;
+      margin-bottom: 15px;
+      box-shadow: 0 0 30px rgba(255,79,163,0.8);
+    }
+
+    h1 { color: #ff4fa3; font-size: 24px; margin-bottom: 8px; }
+    .subtitle { font-size: 14px; color: #666; margin-bottom: 18px; }
+
+    .message {
+      background: #ffe4f2;
+      padding: 18px;
+      border-radius: 18px;
+      font-size: 15px;
+      color: #444;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      min-height: 100px;
+      white-space: pre-line;
+    }
+
+    button {
+      background: linear-gradient(45deg,#ff4fa3,#ff7ac6);
+      color: white;
+      border: none;
+      padding: 13px;
+      width: 100%;
+      border-radius: 40px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 8px 20px rgba(255,79,163,0.4);
+    }
+
+    button:hover { transform: scale(1.07); }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 20px; }
+      .photo { width: 110px; height: 110px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="opening" onclick="openCard()">
+   <h3>Dari Irwan untuk Cyaa</h3>
+   <br/>
+  <h1 style="background-color: white;">💖 Tap untuk buka 💖</h1>
+  <p>Sudah siap yaa? 😌</p>
+</div>
+
+<canvas id="confetti"></canvas>
+
+<div class="card" id="card">
+  <img src="foto/cyaa2.jpg" alt="Foto Sayang" class="photo" />
+
+  <h1>Happy Birthday, Cyaa 🎂</h1>
+  <p class="subtitle">Hari ini dunia beruntung karena kamu lahir 💕</p>
+
+  <div class="message" id="typing"></div>
+
+  <button onclick="showLove()">Peluk Virtual 🤍</button>
+</div>
+
+<!-- AUDIO LOKAL -->
+<audio id="bgMusic" loop>
+  <source src="music/happy-birthday-music-box.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const music = document.getElementById("bgMusic");
+  const opening = document.querySelector(".opening");
+  const card = document.getElementById("card");
+
+  function openCard() {
+    opening.style.opacity = "0";
+    setTimeout(() => opening.style.display = "none", 1000);
+    card.classList.add("show");
+    music.play();
+    typing();
+  }
+
+  const text = "Semoga di usia kamu yang baru ini, semua mimpi dan harapan kamu tercapai ✨\n\nTetap jadi perempuan hebat, manis, dan penuh semangat seperti yang aku kenal.\nTerima kasih sudah hadir dan bikin hidupku lebih berwarna 💗\n\nWish you all the best.";
+  let i = 0;
+
+  function typing() {
+    if (i < text.length) {
+      document.getElementById("typing").innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typing, 40);
+    }
+  }
+
+  function showLove() {
+    alert("Aku sayang banget sama kamu 💞");
+    startConfetti();
+  }
+
+  // Confetti
+  const canvas = document.getElementById('confetti');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  let pieces = [];
+
+  function startConfetti() {
+    pieces = [];
+    for (let i = 0; i < 150; i++) {
+      pieces.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 8 + 2,
+        speed: Math.random() * 3 + 2
+      });
+    }
+    requestAnimationFrame(update);
+  }
+
+  function update() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#ff4fa3";
+    pieces.forEach(p => {
+      p.y += p.speed;
+      if (p.y > canvas.height) p.y = 0;
+      ctx.fillRect(p.x, p.y, p.size, p.size);
+    });
+    requestAnimationFrame(update);
+  }
+</script>
+
+</body>
+</html>
