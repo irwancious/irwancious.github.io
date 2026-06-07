@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maafin Mamas Irwan Ya, Jihan? ❤️</title>
+  <!-- Google Fonts for premium typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Floating Hearts Background Container -->
+  <div id="heart-container"></div>
+
+  <!-- Music Controller -->
+  <div class="music-player">
+    <button id="music-toggle" class="music-btn" aria-label="Toggle Music">
+      <span class="music-icon">🎵</span>
+      <span class="music-status">PLAY MUSIC</span>
+    </button>
+    <audio id="bg-music" loop>
+      <source src="assets/Sweet(chosic.com).mp3" type="audio/mp3">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+
+  <!-- Page Wrapper -->
+  <main class="main-container">
+
+    <!-- Step 1: Closed Envelope Section -->
+    <div id="envelope-wrapper" class="envelope-wrapper">
+      <div class="envelope" id="envelope">
+        <div class="flap"></div>
+        <div class="pocket"></div>
+        <div class="letter-preview">
+          <p>Untuk Jihan ✨</p>
+        </div>
+        <div class="heart-seal">❤️</div>
+      </div>
+      <p class="click-instruction">Ketuk amplop untuk membuka surat dari Mamas Irwan...</p>
+    </div>
+
+    <!-- Step 2: Main Letter Content (Initially Hidden) -->
+    <div id="letter-card" class="letter-card hidden">
+      <div class="letter-header">
+        <h1>Dear Jihan... 🌸</h1>
+      </div>
+
+      <div class="letter-body">
+        <p class="greeting">Hai Jihan yang paling manis,</p>
+
+        <p>Aku tahu beberapa waktu ini suasana di antara kita lagi kurang enak, dan itu karena salahku yang udah bikin
+          kamu kesel dan ngambek. Aku bener-bener minta maaf ya...</p>
+
+        <p>Rasanya sepi banget kalau seharian nggak dapet kabar dari kamu, nggak bisa bercanda, dan nggak chattingan
+          bareng kamu lagi. Aku kangen banget sama cerewetnya kamu, senyuman kamu, dan semua obrolan seru kita.</p>
+
+        <!-- Cute Gallery Carousel inside the letter -->
+        <div class="reason-carousel">
+          <div class="carousel-track-container">
+            <ul class="carousel-track">
+              <li class="carousel-slide current-slide">
+                <img src="assets/apology_chibi.png" alt="Mamas Irwan Minta Maaf" class="carousel-img">
+                <p class="carousel-caption">Mamas minta maaf ya kalau udah bikin Jihan cemberut... 🙏</p>
+              </li>
+              <li class="carousel-slide">
+                <div class="text-slide-content">
+                  <h3>Kenapa kita harus chat-an lagi?</h3>
+                  <ul>
+                    <li>✨ Nggak ada yang nemenin aku begadang & dengerin cerita seru kamu.</li>
+                    <li>✨ Mamas kangen berat sama Jihan.</li>
+                    <li>✨ Hidup Mamas jadi hambar tanpa notifikasi dari kamu.</li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="carousel-nav">
+            <button class="carousel-bullet current-indicator"></button>
+            <button class="carousel-bullet"></button>
+          </div>
+        </div>
+
+        <p class="question">Jihan mau kan maafin Mamas Irwan dan kita chattingan lagi?</p>
+      </div>
+
+      <div class="letter-footer">
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+          <button id="btn-yes" class="btn btn-yes">Mau! ❤️</button>
+          <button id="btn-no" class="btn btn-no">Nggak! 😜</button>
+        </div>
+        <p class="signature">Tertanda,<br><strong>Mamas Irwan</strong></p>
+      </div>
+    </div>
+
+    <!-- Step 3: Success Modal Overlay (Confetti and Happy screen) -->
+    <div id="success-overlay" class="success-overlay hidden">
+      <div class="success-card">
+        <div class="success-icon">🎉❤️✨</div>
+        <h2>Yaaay! Makasih Adek Jihan Cantik! 🥰</h2>
+        <img src="assets/happy_chibi.png" alt="Kita Bahagia Lagi" class="success-img">
+        <p class="success-msg">Mamas usahain nggak bakal bikin kamu ngambek lagi. Yuk, langsung chat-an sekarang!
+          Mamas
+          udah nungguin kamu nih~</p>
+
+        <a id="whatsapp-link" href="#" target="_blank" class="btn btn-whatsapp">
+          <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12.031 2c-5.514 0-9.99 4.478-9.99 9.99 0 1.761.461 3.472 1.336 4.986l-1.42 5.187 5.308-1.393c1.458.795 3.102 1.21 4.762 1.21h.004c5.514 0 9.99-4.478 9.99-9.99 0-2.671-1.04-5.18-2.928-7.07-1.89-1.89-4.393-2.93-7.062-2.93zm0 1.637c2.233 0 4.33.87 5.905 2.445 1.575 1.575 2.443 3.673 2.443 5.908 0 4.614-3.754 8.368-8.368 8.368-1.488 0-2.946-.397-4.223-1.149l-.303-.18-3.136.822.838-3.06-.197-.314c-.822-1.31-1.258-2.824-1.258-4.378 0-4.614 3.754-8.368 8.368-8.368zm-2.046 3.674c-.227 0-.419.082-.573.236-.21.21-.61.597-.61 1.454 0 .857.623 1.686.71 1.803.087.117 1.2 1.834 2.91 2.571 1.42.613 1.71.49 2.016.462.306-.028 1.002-.41 1.144-.808.143-.398.143-.74.1-.809-.043-.07-.157-.112-.329-.197-.172-.086-1.002-.494-1.157-.55-.155-.058-.268-.087-.383.087-.114.174-.44.55-.54.665-.1.115-.2.128-.372.043-.172-.085-.726-.268-1.383-.854-.51-.455-.855-.953-.956-1.124-.102-.172-.01-.265.076-.35.078-.078.172-.2.258-.3.086-.1.115-.172.172-.287.058-.115.029-.215-.014-.301-.044-.085-.383-.923-.525-1.265-.138-.335-.279-.29-.383-.295z" />
+          </svg>
+          Mulai Chattingan Sekarang! ❤️
+        </a>
+      </div>
+    </div>
+
+    <!-- Canvas for Confetti -->
+    <canvas id="confetti-canvas"></canvas>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
